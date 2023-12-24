@@ -207,7 +207,7 @@ def interactive_mode():
         mode = input("[?] s,m:  ")
     
     if mode == "s":
-        log("select file")
+        log("select .plist file")
         split(get_file())
     if mode == "m":
         log("select folder")
