@@ -6,7 +6,7 @@ and merges them together
 ## Why not Absolute's splitter?
 - Faster
 - More accurate
-- Does not require original .plist
+- Does not require original .plist when merging
 
 ## Usage
 1. Download from releases and run executable
