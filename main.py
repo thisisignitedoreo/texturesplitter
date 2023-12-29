@@ -124,7 +124,7 @@ def merge(folder_name, fw=4096, update_callback=lambda x, m: None):
         if i == "textureMeta.plist": continue
         image_meta = plistlib.load(open(os.path.join(folder_name, i), "rb"), fmt=plistlib.FMT_XML)
         image = Image.open(os.path.join(folder_name, i)[:-6])
-
+        image = image.crop((0, 0, image.width + 1, image.height + 1))
         images.append((image, image_meta, i))
 
     metadata = plistlib.load(open(os.path.join(folder_name, "textureMeta.plist"), "rb"), fmt=plistlib.FMT_XML)
@@ -164,7 +164,7 @@ def merge(folder_name, fw=4096, update_callback=lambda x, m: None):
             image = j[0]
             image_meta = j[1]
 
-            image_meta["spriteSize"] = "{%d,%d}" % image.size
+            image_meta["spriteSize"] = "{%d,%d}" % (image.width - 1, image.height - 1)
             image_meta["textureRect"] = "{{%i,%i},%s}" % (cw, h, image_meta["spriteSize"])
             texture.paste(image, (cw, h))
             
@@ -207,7 +207,7 @@ def interactive_mode():
         mode = input("[?] s,m:  ")
     
     if mode == "s":
-        log("select .plist file")
+        log("select file")
         split(get_file())
     if mode == "m":
         log("select folder")
